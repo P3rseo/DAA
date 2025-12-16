@@ -1,29 +1,33 @@
-def merge(l, r, T):
-    i = 0
-    j = 0
-    k = 0
-    while i < len(l) and j < len(r):
-        if l[i] < r[j]:
-            T[k] = l[i]
-            i += 1
-        else:
-            T[k] = [j]
-            j += 1
-    k += 1
-    print(T)
+def mergeSort(arr):
+  if len(arr) <= 1:
+    return arr
 
-def mergeSort(T):
+  mid = len(arr) // 2
+  leftHalf = arr[:mid]
+  rightHalf = arr[mid:]
 
-    totalLen = len(T)
-    halfLen = totalLen // 2
+  sortedLeft = mergeSort(leftHalf)
+  sortedRight = mergeSort(rightHalf)
 
-    if totalLen == 1:
-        return T
+  return merge(sortedLeft, sortedRight)
+
+def merge(left, right):
+  result = []
+  i = j = 0
+
+  while i < len(left) and j < len(right):
+    if left[i] < right[j]:
+      result.append(left[i])
+      i += 1
     else:
-        L = mergeSort(T[:halfLen])
-        R = mergeSort(T[halfLen:])
-        merge(L, R, T)
-        return T
+      result.append(right[j])
+      j += 1
 
-T = [3,1,4,1,7,9,2,6,5,3,5,8]
-print(mergeSort(T))
+  result.extend(left[i:])
+  result.extend(right[j:])
+
+  return result
+
+mylist = [3, 7, 6, -10, 15, 23.5, 55, -13]
+mysortedlist = mergeSort(mylist)
+print("Sorted array:", mysortedlist)

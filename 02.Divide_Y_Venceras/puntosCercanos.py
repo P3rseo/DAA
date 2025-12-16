@@ -62,8 +62,8 @@ def dyv_puntos_cercanos(puntos_x, puntos_y):
 
 
 n = 100
-puntos = [(random.randint(-n*10, n*10), random.randint(-n*10, n*10)) for _ in range(n)]
-
+#puntos = [(random.randint(-n*10, n*10), random.randint(-n*10, n*10)) for _ in range(n)]
+puntos = [[-1, -2], [0, 0], [1, 2], [2, 3]]
 puntos_x = puntos.copy()
 puntos_x.sort(key= lambda p: p[0])
 puntos_y = puntos.copy()
