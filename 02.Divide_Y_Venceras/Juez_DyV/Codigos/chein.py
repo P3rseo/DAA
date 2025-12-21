@@ -1,13 +1,13 @@
 import math
-import random
 
 
 def distancia_euclidea(p1, p2):
     return math.sqrt((p1[0]-p2[0])**2 + (p1[1]-p2[1])**2)
 
+
 def fuerza_bruta(puntos_x):
     n = len(puntos_x)
-    min_distancia = 0x3f3f3f3f # float('inf')
+    min_distancia = 0x3f3f3f3f  # float('inf')
     for i in range(n):
         for j in range(i + 1, n):
             d = distancia_euclidea(puntos_x[i], puntos_x[j])
@@ -50,7 +50,7 @@ def dyv_puntos_cercanos(puntos_x, puntos_y):
         min_i = dyv_puntos_cercanos(puntos_x_i, puntos_y_i)
         min_d = dyv_puntos_cercanos(puntos_x_d, puntos_y_d)
 
-        d  = min(min_i, min_d)
+        d = min(min_i, min_d)
 
         franja = []
         for p in puntos_y:
@@ -61,15 +61,31 @@ def dyv_puntos_cercanos(puntos_x, puntos_y):
         return dist_franja
 
 
-n = 100
-puntos = [(random.randint(-n*10, n*10), random.randint(-n*10, n*10)) for _ in range(n)]
-#puntos = [[-1, -2], [0, 0], [1, 2], [2, 3]]
-puntos_x = puntos.copy()
-puntos_x.sort(key= lambda p: p[0])
-puntos_y = puntos.copy()
-puntos_y.sort(key= lambda p: p[1])
+# --- INPUTS ---
+numTiendasAbiertas, costeEnviarMasCercanas = map(int, input().strip().split())
 
+cordTiendas = []
+for i in range(numTiendasAbiertas):
+    cordX, cordY = map(int, input().strip().split())
+    cordTiendas.append((cordX, cordY))
+
+puntos_x = cordTiendas.copy()
+puntos_x.sort(key=lambda p: p[0])
+puntos_y = cordTiendas.copy()
+puntos_y.sort(key=lambda p: p[1])
+
+numQueries = int(input().strip())
+queries = []
+for i in range(numQueries):
+    tienda1, tienda2 = map(int, input().strip().split())
+    queries.append((tienda1, tienda2))
 
 distancia_minima = dyv_puntos_cercanos(puntos_x, puntos_y)
+print(f"MINIMO: {distancia_minima:.2f}")
 
-print(str(distancia_minima))
+factor = costeEnviarMasCercanas / distancia_minima
+
+for tienda1, tienda2 in queries:
+    d = distancia_euclidea(cordTiendas[tienda1], cordTiendas[tienda2])
+    coste = d * factor
+    print(f"{tienda1} -> {tienda2}: {coste:.2f}")
