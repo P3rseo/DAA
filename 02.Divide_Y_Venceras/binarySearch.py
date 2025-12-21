@@ -15,6 +15,6 @@ def busquedaBinaria(lista, buscado, inferior, superior):
 T = [-3, -1, 0, 2, 3, 4, 5, 6, 7, 8, 10, 11, 13, 15, 16, 17]
 inf = 0
 sup = len(T)
-buscado = -1
+buscado = 12
 pos = busquedaBinaria(T, buscado, inf, sup)
 print(pos)

@@ -1,33 +1,44 @@
-def mergeSort(arr):
-  if len(arr) <= 1:
-    return arr
+def merge(left, right, v):
+    l = 0
+    r = 0
+    i = 0
 
-  mid = len(arr) // 2
-  leftHalf = arr[:mid]
-  rightHalf = arr[mid:]
+    while l < len(left) and r < len(right):
+        if left[l] <= right[r]:
+            v[i] = left[l]
+            l += 1
+        else:
+            v[i] = right[r]
+            r += 1
+        i += 1
 
-  sortedLeft = mergeSort(leftHalf)
-  sortedRight = mergeSort(rightHalf)
-
-  return merge(sortedLeft, sortedRight)
-
-def merge(left, right):
-  result = []
-  i = j = 0
-
-  while i < len(left) and j < len(right):
-    if left[i] < right[j]:
-      result.append(left[i])
-      i += 1
+    # Copiar el resto (solo uno de los dos tendrá elementos pendientes)
+    if l < len(left):
+        resto = left
+        f = l
     else:
-      result.append(right[j])
-      j += 1
+        resto = right
+        f = r
 
-  result.extend(left[i:])
-  result.extend(right[j:])
+    for j in range(f, len(resto)):
+        v[i] = resto[j]
+        i += 1
 
-  return result
 
-mylist = [3, 7, 6, -10, 15, 23.5, 55, -13]
-mysortedlist = mergeSort(mylist)
-print("Sorted array:", mysortedlist)
+def merge_sort(v):
+    if len(v) == 1:
+        return
+
+    mid = len(v) // 2
+    left = v[:mid]
+    right = v[mid:]
+
+    merge_sort(left)
+    merge_sort(right)
+    merge(left, right, v)
+
+
+#v = [3, 1, 4, 1, 7, 9, 2, 6, 5, 3, 5, 8]
+v = [8, 3, 4, 12, 5, 6]
+merge_sort(v)
+print(v)
