@@ -7,9 +7,9 @@ for candidato in candidatos:
     weight, value = candidato
     candidato.append(value / weight)
 """
-print(candidatos)  # Imprimir candidatos antes de ser ordenados
+print(f"Candidatos antes de ser odenados:\n{candidatos}\n\n")  # Imprimir candidatos antes de ser ordenados
 candidatos.sort(key=lambda x: x[2], reverse=True)  # Ordenar los candidatos en funcion de v/w
-print(candidatos)  # Imprimir los candidatos ordenados
+print(f"Candidatos después de ser ordenados:\n{candidatos}\n")  # Imprimir los candidatos ordenados
 
 valorTotal = 0  # Valor inicial
 pesoActual = 0  # Peso inicial
