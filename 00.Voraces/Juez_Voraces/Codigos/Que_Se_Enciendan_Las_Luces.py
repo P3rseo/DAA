@@ -50,7 +50,7 @@ for _ in range(N):
         b, i, k, t = map(int, partes[1:])
         tentadores.append((nombre, b, i, k, t))
 
-    concustantes.append((C, M, T, tentadores))
+    concustantes.append((C, M, tentadores))
 
 # --- PROCESO DE IMPRESION ---
 for concursante in concustantes:
