@@ -1,5 +1,5 @@
-def scheduling(tentadores, diaMax):
-    tentadores.sort(key=lambda x: x[2], reverse=True)
+def maximizar_tentación(tentadores, diaMax):
+    tentadores.sort(key=lambda x: x[2], reverse = True)
     seleccionados = [None] * (diaMax + 1)
     for tentador in tentadores:
         dia = tentador[1]
@@ -11,21 +11,22 @@ def scheduling(tentadores, diaMax):
             dia -= 1
     return seleccionados
 
-# --- INPUTS ---
+
 numTentadores = int(input().strip())
-tentadores = []
+
 diaMax = -1
-for i in range(numTentadores):
+tentadores = []
+
+for tentador in range(numTentadores):
     partes = input().strip().split()
     nombre = partes[0]
-    capMax, nivelTentacion = map(int, partes[1:])
+    capMax = int(partes[1])
+    nivelTentacion = int(partes[2])
     if capMax > diaMax:
         diaMax = capMax
     tentadores.append([nombre, capMax, nivelTentacion])
 
-    
-# --- OUTPUTS ---
-seleccionados = scheduling(tentadores, diaMax)
+seleccionados = maximizar_tentación(tentadores, diaMax)
 for i, seleccionado in enumerate(seleccionados):
     if seleccionado is None:
         print(f"DIA {i}: SIN TENTADOR")
