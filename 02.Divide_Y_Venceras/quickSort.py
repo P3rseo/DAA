@@ -1,24 +1,33 @@
-def partition(array, low, high):
-  pivot = array[high]
-  i = low - 1
+def pivot(v, left, right):
+    pivote = v[left]
+    i = left+1
+    while i < right and v[i] < pivote:
+        i += 1
+    j = right
+    while j > left and v[j] > pivote:
+        j -= 1
+    while i < j:
+        v[i], v[j] = v[j], v[i]
+        i += 1
+        while v[i] < pivote:
+            i += 1
+        j -= 1
+        while v[j] > pivote:
+            j -= 1
+    v[left], v[j] = v[j], v[left]
+    return j
 
-  for j in range(low, high):
-     if array[j] <= pivot:
-       i += 1
-       array[i], array[j] = array[j], array[i]
+def quick_sort(v, i, j):
+    if i > j:
+        return 
+    else:
+        pivote = pivot(v, i, j)
+        quick_sort(v, i, pivote - 1)
+        quick_sort(v, pivote + 1, j)
 
-  array[i+1], array[high] = array[high], array[i+1]
-  return i+1
 
-def quicksort(array, low=0, high=None):
-  if high is None:
-    high = len(array) - 1
-
-  if low < high:
-    pivot_index = partition(array, low, high)
-    quicksort(array, low, pivot_index-1)
-    quicksort(array, pivot_index+1, high)
-
-mylist = [64, 34, 25, 5, 22, 11, 90, 12]
-quicksort(mylist)
-print(*mylist)
+# v = [4, 6, 4, 67, 4, 3, 4, 4, 65, 34, 5, 3, 5, 3]
+v = [9, 4, 17, 21, 34, 6, 0, -5, 56, 14, 8, 43]
+v2 = [9, 4, 17, 21, 34, 6, 0, -5]
+quick_sort(v2, 0, len(v)-1)
+print(v)

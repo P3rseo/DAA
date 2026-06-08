@@ -1,4 +1,4 @@
-def merge(left, right, v):
+def merge(v, left, right):
     l = 0
     r = 0
     i = 0
@@ -35,7 +35,7 @@ def merge_sort(v):
 
     merge_sort(left)
     merge_sort(right)
-    merge(left, right, v)
+    merge(v, left, right)
 
 
 #v = [3, 1, 4, 1, 7, 9, 2, 6, 5, 3, 5, 8]
