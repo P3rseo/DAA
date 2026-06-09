@@ -38,5 +38,8 @@ def merge_sort(v):
 
 
 V = [38, 27, 43, 3, 9, 82, 10, -5, 10, 0, -1, 15, 94, 23, 7, 12]
+list = [4,6,2,4,2,1,6,8,89,5,424,678,785,7,8567,85,67]
 merge_sort(V)
 print(V)
+merge_sort(list)
+print(list)
