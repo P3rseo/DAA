@@ -40,3 +40,52 @@ origen = 0
 distancias, precedencias = dijkstra(origen, g)
 print("distancias:", distancias)
 print("precedencias:", precedencias)
+
+
+
+
+
+import heapq
+
+
+def dijkstra(origen, g):
+
+    n = len(g)
+    distancias = [float("inf")] * n
+    distancias[origen] = 0
+
+    padres = [-1] * n
+    padres[origen] = origen
+
+    colaPrioridad = [(0, origen)]
+
+    while colaPrioridad:
+        distMin, nodo = heapq.heappop(colaPrioridad)
+
+        if distMin != distancias[nodo]:
+            continue
+
+        for vecino, peso in g[nodo]:
+            if distMin + peso < distancias[vecino]:
+                distancias[vecino] = distMin + peso
+                padres[vecino] = nodo
+                heapq.heappush(colaPrioridad, (distancias[vecino], vecino))
+
+    return distancias, padres
+
+
+def reconstruir_camino(origen, destino, padres):
+    if padres[destino] == -1:
+        return []
+
+    camino = []
+    actual = destino
+
+    while actual != origen:
+        camino.append(actual)
+        actual = padres[actual]
+
+    camino.append(origen)
+    camino.reverse()
+
+    return camino
